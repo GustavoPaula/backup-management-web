@@ -1,0 +1,22 @@
+# Dockerfile.dev
+FROM node:22-alpine
+
+# Instalar versão específica do pnpm
+RUN corepack enable && corepack prepare pnpm@10.18.3 --activate
+
+WORKDIR /app
+
+# Copiar apenas os arquivos de configuração primeiro
+COPY package.json pnpm-lock.yaml* ./
+
+# Instalar dependências
+RUN CI=true pnpm install
+
+# Copiar o restante do código
+COPY . .
+
+# Expor porta do Vite
+EXPOSE 5173
+
+# Comando para desenvolvimento
+CMD ["pnpm", "run", "dev", "--host", "0.0.0.0"]
