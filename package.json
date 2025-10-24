@@ -8,42 +8,30 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-
-
     "docker:dev": "docker-compose up -d",
     "docker:dev:build": "docker-compose build",
     "docker:dev:logs": "docker-compose logs -f",
     "docker:dev:down": "docker-compose down",
     "docker:dev:restart": "docker-compose restart",
     "docker:dev:shell": "docker-compose exec frontend-dev sh",
-    
-
     "docker:prod:build": "docker-compose -f docker-compose.prod.yml build",
     "docker:prod:up": "docker-compose -f docker-compose.prod.yml up -d",
     "docker:prod:logs": "docker-compose -f docker-compose.prod.yml logs -f",
     "docker:prod:down": "docker-compose -f docker-compose.prod.yml down",
     "docker:prod:restart": "docker-compose -f docker-compose.prod.yml restart",
     "docker:prod:shell": "docker-compose -f docker-compose.prod.yml exec app sh",
-    
-
     "docker:clean": "docker system prune -f",
     "docker:clean:all": "docker system prune -a -f",
     "docker:clean:images": "docker image prune -f",
     "docker:clean:volumes": "docker volume prune -f",
-    
-
     "docker:ps": "docker-compose ps",
     "docker:ps:prod": "docker-compose -f docker-compose.prod.yml ps",
     "docker:images": "docker images",
     "docker:stats": "docker stats",
-    
-
     "docker:build:dev": "docker build -f Dockerfile.dev -t backup-management-web:dev .",
     "docker:build:prod": "docker build -f Dockerfile.prod -t backup-management-web:prod .",
     "docker:run:dev": "docker run -p 5173:5173 -v $(pwd):/app -v /app/node_modules backup-management-web:dev",
     "docker:run:prod": "docker run -p 5174:5174 backup-management-web:prod",
-    
-
     "docker:up": "pnpm run docker:dev",
     "docker:down": "pnpm run docker:dev:down",
     "docker:build": "pnpm run docker:dev:build",
@@ -65,9 +53,11 @@
     "@types/react-dom": "^19.1.9",
     "@vitejs/plugin-react": "^5.0.4",
     "eslint": "^9.36.0",
+    "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.22",
     "globals": "^16.4.0",
+    "jiti": "^2.6.1",
     "lefthook": "^1.13.6",
     "typescript": "~5.9.3",
     "typescript-eslint": "^8.45.0",
