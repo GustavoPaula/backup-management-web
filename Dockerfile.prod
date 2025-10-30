@@ -1,33 +1,47 @@
-# Dockerfile.prod
-FROM node:22-alpine as builder
+# Define a imagem base Node.js 22 Alpine para o estágio de construção (builder)
+FROM node:22-alpine AS builder
 
-RUN corepack enable && corepack prepare pnpm@10.18.3 --activate
+# Instala o gerenciador de pacotes pnpm globalmente na versão específica 10.19.0
+RUN npm install -g pnpm@10.19.0
 
+# Define o diretório de trabalho dentro do container como /app
 WORKDIR /app
 
-COPY package.json pnpm-lock.yaml* ./
+# Copia os arquivos de definição de dependências (package.json e pnpm-lock.yaml) para o diretório atual
+COPY package.json pnpm-lock.yaml ./
+
+# Instala todas as dependências do projeto usando o lockfile congelado (não atualiza o arquivo de lock)
 RUN pnpm install --frozen-lockfile
 
+# Copia todo o código fonte do projeto para o diretório atual do container
 COPY . .
-RUN pnpm run build
 
-FROM node:22-alpine as production
+# Executa o script de build definido no package.json para compilar a aplicação
+RUN pnpm build
 
-RUN corepack enable && corepack prepare pnpm@10.18.3 --activate
+# Inicia um novo estágio para produção usando Node.js 22 Alpine (imagem limpa e otimizada)
+FROM node:22-alpine AS production
 
+# Instala novamente o pnpm globalmente no estágio de produção
+RUN npm install -g pnpm@10.19.0
+
+# Define o diretório de trabalho como /app no estágio de produção
 WORKDIR /app
 
-# Copiar package.json atualizado se necessário
-COPY package.json pnpm-lock.yaml* ./
+# Copia os arquivos de dependências para o estágio de produção
+COPY package.json pnpm-lock.yaml ./
 
-# Opção A: Adicionar serve ao package.json antes de instalar
-RUN pnpm add serve@14.2.1 --prod && pnpm install --frozen-lockfile
+# Instala apenas as dependências de produção (exclui devDependencies) usando lockfile congelado
+RUN pnpm install --frozen-lockfile --prod
 
-# Opção B: Ou instalar globalmente (mais simples)
-# RUN npm install -g serve@14.2.1
+# Instala especificamente o Vite (com override para rolldown) e o plugin React necessários para o preview
+RUN pnpm install vite@npm:rolldown-vite@7.1.14 @vitejs/plugin-react
 
+# Copia apenas a pasta dist (arquivos buildados) do estágio builder para o estágio production
 COPY --from=builder /app/dist ./dist
 
+# Documenta que o container expõe a porta 5174 (para comunicação externa)
 EXPOSE 5174
 
-CMD ["npx", "serve", "-s", "dist", "-l", "5174"]
+# Comando padrão executado ao iniciar o container - roda o vite preview com host e porta específicos
+CMD ["pnpm", "run", "preview", "--host", "0.0.0.0", "--port", "5174"]
