@@ -1,42 +1,50 @@
-# Production Dockerfile for workflow app
+# Define a imagem base Node.js 22 Alpine para o estágio de construção (builder)
 FROM node:22-alpine AS builder
 
-# Install pnpm
+# Instala o gerenciador de pacotes pnpm globalmente na versão específica 10.19.0
 RUN npm install -g pnpm@10.19.0
 
+# Define o diretório de trabalho dentro do container como /app
 WORKDIR /app
 
+# Copia os arquivos de definição de dependências (package.json e pnpm-lock.yaml) para o diretório atual
 COPY package.json pnpm-lock.yaml ./
 
-# Instala todas as dependências
+# Instala todas as dependências do projeto usando o lockfile congelado (não atualiza o arquivo de lock)
 RUN pnpm install --frozen-lockfile
 
+# Copia todo o código fonte do projeto para o diretório atual do container
 COPY . .
 
+# Instala o TypeScript como dependência de desenvolvimento na versão específica ~5.9.3
 RUN pnpm add -D typescript@~5.9.3
 
+# Executa o script de build definido no package.json para compilar a aplicação
 RUN pnpm build
 
-# Production stage
+# Inicia um novo estágio para produção usando Node.js 22 Alpine (imagem limpa e otimizada)
 FROM node:22-alpine AS production
 
+# Instala novamente o pnpm globalmente no estágio de produção
 RUN npm install -g pnpm@10.19.0
 
+# Define o diretório de trabalho como /app no estágio de produção
 WORKDIR /app
 
-# Copia apenas o necessário
+# Copia os arquivos de dependências para o estágio de produção
 COPY package.json pnpm-lock.yaml ./
 
-# Instala apenas dependências de produção
+# Instala apenas as dependências de produção (exclui devDependencies) usando lockfile congelado
 RUN pnpm install --frozen-lockfile --prod
 
-RUN pnpm install rolldown-vite@7.1.14
+# Instala especificamente o Vite (com override para rolldown) e o plugin React necessários para o preview
+RUN pnpm install vite@npm:rolldown-vite@7.1.14 @vitejs/plugin-react
 
-# Copia o build do estágio anterior
+# Copia apenas a pasta dist (arquivos buildados) do estágio builder para o estágio production
 COPY --from=builder /app/dist ./dist
 
-# Exponha a porta
+# Documenta que o container expõe a porta 5174 (para comunicação externa)
 EXPOSE 5174
 
-# Usa o vite preview do projeto (não precisa instalar globalmente)
-CMD ["pnpm", "run", "vite", "preview", "--host", "0.0.0.0", "--port", "5174"]
+# Comando padrão executado ao iniciar o container - roda o vite preview com host e porta específicos
+CMD ["pnpm", "run", "preview", "--host", "0.0.0.0", "--port", "5174"]
