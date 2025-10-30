@@ -1,33 +1,42 @@
-# Dockerfile.prod
-FROM node:22-alpine as builder
+# Production Dockerfile for workflow app
+FROM node:22-alpine AS builder
 
-RUN corepack enable && corepack prepare pnpm@10.18.3 --activate
+# Install pnpm
+RUN npm install -g pnpm@10.19.0
 
 WORKDIR /app
 
-COPY package.json pnpm-lock.yaml* ./
+COPY package.json pnpm-lock.yaml ./
+
+# Instala todas as dependências
 RUN pnpm install --frozen-lockfile
 
 COPY . .
-RUN pnpm run build
 
-FROM node:22-alpine as production
+RUN pnpm add -D typescript@~5.9.3
 
-RUN corepack enable && corepack prepare pnpm@10.18.3 --activate
+RUN pnpm build
+
+# Production stage
+FROM node:22-alpine AS production
+
+RUN npm install -g pnpm@10.19.0
 
 WORKDIR /app
 
-# Copiar package.json atualizado se necessário
-COPY package.json pnpm-lock.yaml* ./
+# Copia apenas o necessário
+COPY package.json pnpm-lock.yaml ./
 
-# Opção A: Adicionar serve ao package.json antes de instalar
-RUN pnpm add serve@14.2.1 --prod && pnpm install --frozen-lockfile
+# Instala apenas dependências de produção
+RUN pnpm install --frozen-lockfile --prod
 
-# Opção B: Ou instalar globalmente (mais simples)
-# RUN npm install -g serve@14.2.1
+RUN pnpm install rolldown-vite@7.1.14
 
+# Copia o build do estágio anterior
 COPY --from=builder /app/dist ./dist
 
+# Exponha a porta
 EXPOSE 5174
 
-CMD ["npx", "serve", "-s", "dist", "-l", "5174"]
+# Usa o vite preview do projeto (não precisa instalar globalmente)
+CMD ["pnpm", "run", "vite", "preview", "--host", "0.0.0.0", "--port", "5174"]

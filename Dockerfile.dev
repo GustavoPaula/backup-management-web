@@ -2,18 +2,15 @@
 FROM node:22-alpine
 
 # Instalar versão específica do pnpm
-RUN corepack enable && corepack prepare pnpm@10.18.3 --activate
+RUN npm install -g pnpm@10.19.0
 
 WORKDIR /app
 
 # Copiar apenas os arquivos de configuração primeiro
-COPY package.json pnpm-lock.yaml* ./
+COPY . .
 
 # Instalar dependências
-RUN CI=true pnpm install
-
-# Copiar o restante do código
-COPY . .
+RUN CI=true pnpm install --no-frozen-lockfile
 
 # Expor porta do Vite
 EXPOSE 5173

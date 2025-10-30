@@ -8,11 +8,9 @@ services:
     volumes:
       - .:/app
       - /app/node_modules  # Isso evita que node_modules seja sobrescrito
-    working_dir: /app
     environment:
       - NODE_ENV=development
       - CHOKIDAR_USEPOLLING=true  # Importante para hot reload no Docker
       - WATCHPACK_POLLING=true    # Para melhorar o watching de arquivos
     tty: true
     stdin_open: true
-    command: pnpm run dev --host 0.0.0.0
