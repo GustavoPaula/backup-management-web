@@ -1,23 +1,20 @@
-import js from '@eslint/js'
-import globals from 'globals'
-import reactHooks from 'eslint-plugin-react-hooks'
-import reactRefresh from 'eslint-plugin-react-refresh'
-import tseslint from 'typescript-eslint'
-import { defineConfig, globalIgnores } from 'eslint/config'
+import { defineConfig } from "eslint/config";
 
 export default defineConfig([
-  globalIgnores(['dist']),
+  // matches all files ending with .js
   {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      js.configs.recommended,
-      tseslint.configs.recommended,
-      reactHooks.configs['recommended-latest'],
-      reactRefresh.configs.vite,
-    ],
-    languageOptions: {
-      ecmaVersion: 2020,
-      globals: globals.browser,
+    files: ["**/*.js", "**/*.tsx"],
+    rules: {
+      semi: "error",
     },
   },
-])
+
+  // matches all files ending with .js except those in __tests
+  {
+    files: ["**/*.js", "**/*.tsx"],
+    ignores: ["__tests/**"],
+    rules: {
+      "no-console": "error",
+    },
+  },
+]);
