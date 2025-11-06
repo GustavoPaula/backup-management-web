@@ -1,15 +1,18 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import './App.css';
 
 function App() {
   const [count, setCount] = useState(0);
-  console.log();
+
+  const handleCount = useCallback(() => {
+    setCount((count) => count + 1);
+  }, []);
 
   return (
     <>
       <h1>Vite + React</h1>
       <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
+        <button type="button" onClick={handleCount}>
           count is {count}
         </button>
         <p>
