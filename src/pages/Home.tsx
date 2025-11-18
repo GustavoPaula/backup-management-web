@@ -1,7 +1,9 @@
+import { LoginForm } from '../components/forms/login-form';
+
 function Home() {
   return (
-    <div>
-      <h1>Página HOME</h1>
+    <div className="min-h-screen flex items-center justify-center bg-linear-to-br from-gray-100 to-gray-200 p-4">
+      <LoginForm />
     </div>
   );
 }
