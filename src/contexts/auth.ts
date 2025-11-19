@@ -1,8 +1,6 @@
 import { createContext } from 'react';
 
-import { DecodeResult } from 'paseto';
-
-import { Noop } from '../types';
+import { DecodeResult, Noop } from '../types';
 
 export type SignIn = (props: {
   username: string;

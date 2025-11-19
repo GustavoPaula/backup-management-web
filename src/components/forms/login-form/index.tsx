@@ -1,9 +1,10 @@
 'use client';
 
-import { useCallback, useState } from 'react';
+import { FormEventHandler, useCallback, useState } from 'react';
 
 import { Lock, User, Key, LogIn } from 'lucide-react';
 
+import { useAuth } from '../../../hooks/useAuth';
 import { Button } from '../../ui/button';
 import { Card, CardContent } from '../../ui/card';
 import { Checkbox } from '../../ui/checkbox';
@@ -12,6 +13,17 @@ import { Label } from '../../ui/label';
 
 export function LoginForm() {
   const [rememberMe, setRememberMe] = useState(false);
+  const { signIn } = useAuth();
+  const handleSubmit = useCallback<FormEventHandler<HTMLFormElement>>(
+    async (event) => {
+      event.preventDefault();
+      await signIn({
+        username: 'admin',
+        password: 'Admin@25',
+      });
+    },
+    [signIn],
+  );
 
   const handleRememberMe = useCallback(
     (checked: boolean) => setRememberMe(checked),
@@ -30,7 +42,7 @@ export function LoginForm() {
       </div>
 
       <CardContent className="p-8">
-        <form className="space-y-5">
+        <form className="space-y-5" onSubmit={handleSubmit}>
           {/* Username field */}
           <div className="space-y-2">
             <Label

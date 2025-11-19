@@ -1,12 +1,11 @@
 import { FC, ReactNode, useCallback, useMemo, useState } from 'react';
 
-import { decode } from 'paseto';
-
 import {
   AuthContext,
   type AuthContextProps,
   type SignIn,
 } from '../../contexts/auth';
+import { pasetoDecode } from '../../lib/pasetoDecode';
 import { LoginResponse } from '../../types';
 export interface AuthProviderProps {
   children: ReactNode;
@@ -25,7 +24,7 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
       });
       if (!response.ok) throw new Error('Credenciais inválidas');
       const data = (await response.json()) as LoginResponse;
-      setDecodedToken(decode(data.token));
+      setDecodedToken(pasetoDecode(data.token));
       setIsAuthenticated(true);
     } catch (error) {
       // eslint-disable-next-line no-console
