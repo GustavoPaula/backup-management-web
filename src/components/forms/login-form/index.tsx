@@ -2,7 +2,7 @@
 
 import { FormEventHandler, useCallback, useState } from 'react';
 
-import { Lock, User, Key, LogIn } from 'lucide-react';
+import { User, Key, LogIn } from 'lucide-react';
 
 import { useAuth } from '../../../hooks/useAuth';
 import { Button } from '../../ui/button';
@@ -33,11 +33,17 @@ export function LoginForm() {
   return (
     <Card className="w-full max-w-md shadow-2xl overflow-hidden">
       {/* Header with gradient */}
-      <div className="bg-linear-to-br from-indigo-600 via-purple-600 to-purple-700 text-white px-8 py-12 text-center">
-        <div className="bg-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
-          <Lock className="w-8 h-8 text-purple-600" />
+      <div className="bg-linear-to-br from-indigo-600 via-blue-600 to-blue-700 text-white px-8 py-12 text-center">
+        <div className="bg-white w-41 h-41 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
+          <img
+            src="/src/public/images/logo-wt.jpeg"
+            alt="WT Soluções em Tecnologia"
+            width={96}
+            height={96}
+            className="h-30 w-30 object-contain rounded-lg"
+          />
         </div>
-        <h1 className="text-3xl font-bold mb-2">Bem-vindo de volta</h1>
+        <h1 className="text-3xl font-bold mb-2">Sistema de Backup</h1>
         <p className="text-purple-100 text-sm">Faça login para continuar</p>
       </div>
 
@@ -107,7 +113,7 @@ export function LoginForm() {
           {/* Login button */}
           <Button
             type="submit"
-            className="w-full h-12 bg-linear-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-medium shadow-lg"
+            className="w-full h-12 bg-linear-to-r from-indigo-600 to-blue-600 hover:from-indigo-700 hover:to-blue-700 text-white font-medium shadow-lg"
           >
             <LogIn className="w-5 h-5 mr-2" />
             Entrar
