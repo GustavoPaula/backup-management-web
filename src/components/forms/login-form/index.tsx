@@ -33,7 +33,7 @@ export function LoginForm() {
   return (
     <Card className="w-full max-w-md shadow-2xl overflow-hidden">
       {/* Header with gradient */}
-      <div className="bg-linear-to-br from-indigo-600 via-blue-600 to-blue-700 text-white px-8 py-12 text-center">
+      <div className="bg-linear-to-br from-blue-500 to-blue-600 text-white px-8 py-12 text-center">
         <div className="bg-white w-41 h-41 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
           <img
             src="/src/public/images/logo-wt.jpeg"
@@ -104,7 +104,7 @@ export function LoginForm() {
             </div>
             <a
               href="/forgot-password"
-              className="text-sm text-indigo-600 hover:text-indigo-700 font-medium"
+              className="text-sm text-blue-600 hover:text-blue-700 font-medium"
             >
               Esqueceu a senha?
             </a>
@@ -113,7 +113,7 @@ export function LoginForm() {
           {/* Login button */}
           <Button
             type="submit"
-            className="w-full h-12 bg-linear-to-r from-indigo-600 to-blue-600 hover:from-indigo-700 hover:to-blue-700 text-white font-medium shadow-lg"
+            className="w-full h-12 bg-linear-to-br from-blue-500 to-blue-600 text-white font-medium shadow-lg"
           >
             <LogIn className="w-5 h-5 mr-2" />
             Entrar

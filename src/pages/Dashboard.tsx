@@ -1,7 +1,9 @@
 import { type FC } from 'react';
 
+import DashboardPage from '../components/dashboard/dashboardPage';
+
 const Dashboard: FC = () => {
-  return <div>Dashboard</div>;
+  return <DashboardPage />;
 };
 
 export default Dashboard;
