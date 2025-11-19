@@ -1,9 +1,7 @@
-import { type FC } from 'react'
+import { type FC } from 'react';
 
-export const Dashboard:FC = () => {
-  return (
-    <div>
-      Dashboard
-    </div>
-  )
-}
+const Dashboard: FC = () => {
+  return <div>Dashboard</div>;
+};
+
+export default Dashboard;

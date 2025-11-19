@@ -1,8 +1,8 @@
 import { type FC } from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
 
-export const Private: FC = () => {
+export const Public: FC = () => {
   const isAuthenticated = false;
 
-  return isAuthenticated ? <Outlet /> : <Navigate to="/" replace />;
+  return isAuthenticated ? <Navigate to="/app" replace /> : <Outlet />;
 };

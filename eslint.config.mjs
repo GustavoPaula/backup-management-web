@@ -156,11 +156,7 @@ export default defineConfig([
       'react-perf/jsx-no-new-array-as-prop': 'warn',
       'react-perf/jsx-no-new-function-as-prop': 'warn',
       'react-perf/jsx-no-new-object-as-prop': 'warn',
-      'react-perf/jsx-no-jsx-as-prop': ['warn', {
-      'exceptions': [
-          { 'prop': 'element', 'component': 'Route' }
-        ]
-      }],
+      'react-perf/jsx-no-jsx-as-prop': 'off',
 
       // JSX A11y rules (accessibility)
       ...jsxA11yPlugin.configs.recommended.rules,
