@@ -1,6 +1,13 @@
 import { createContext } from 'react';
 
-import { DecodeResult, Noop } from '../types';
+import { JwtPayload } from 'jwt-decode';
+
+import { Noop } from '../types';
+
+export interface CustomJwtPayload extends JwtPayload {
+  user_id?: string;
+  role?: string;
+}
 
 export type SignIn = (props: {
   username: string;
@@ -11,7 +18,7 @@ export interface AuthContextProps {
   isAuthenticated: boolean;
   signIn: SignIn | null;
   signOut: Noop | null;
-  decodedToken: DecodeResult | null;
+  decodedToken: CustomJwtPayload | null;
 }
 
 export const AuthContext = createContext<AuthContextProps>({

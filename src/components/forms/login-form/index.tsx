@@ -17,9 +17,12 @@ export function LoginForm() {
   const handleSubmit = useCallback<FormEventHandler<HTMLFormElement>>(
     async (event) => {
       event.preventDefault();
+      const formData = new FormData(event.currentTarget);
+      const username = formData.get('username') as string;
+      const password = formData.get('password') as string;
       await signIn({
-        username: 'admin',
-        password: 'Admin@25',
+        username,
+        password,
       });
     },
     [signIn],
@@ -61,6 +64,7 @@ export function LoginForm() {
               <User className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
               <Input
                 id="username"
+                name="username"
                 type="text"
                 placeholder="Digite seu usuário"
                 className="pl-10 h-12"
@@ -81,6 +85,7 @@ export function LoginForm() {
               <Input
                 id="password"
                 type="password"
+                name="password"
                 placeholder="Digite sua senha"
                 className="pl-10 h-12"
               />

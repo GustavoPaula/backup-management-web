@@ -1,11 +1,13 @@
 import { FC, ReactNode, useCallback, useMemo, useState } from 'react';
 
+import { jwtDecode } from 'jwt-decode';
+
 import {
   AuthContext,
+  CustomJwtPayload,
   type AuthContextProps,
   type SignIn,
 } from '../../contexts/auth';
-import { pasetoDecode } from '../../lib/pasetoDecode';
 import { LoginResponse } from '../../types';
 export interface AuthProviderProps {
   children: ReactNode;
@@ -24,7 +26,8 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
       });
       if (!response.ok) throw new Error('Credenciais inválidas');
       const data = (await response.json()) as LoginResponse;
-      setDecodedToken(pasetoDecode(data.token));
+      const decodedToken = jwtDecode<CustomJwtPayload>(data.data);
+      setDecodedToken(decodedToken);
       setIsAuthenticated(true);
     } catch (error) {
       // eslint-disable-next-line no-console
