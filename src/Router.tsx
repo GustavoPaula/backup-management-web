@@ -8,6 +8,7 @@ const HomePage = lazy(async () => await import('./pages/Home'));
 const DashboardPage = lazy(async () => await import('./pages/Dashboard'));
 const UsersPage = lazy(async () => await import('./pages/Users'));
 const CustomersPage = lazy(async () => await import('./pages/Customers'));
+const UsersRegistration = lazy(async () => await import('./pages/UsersCreate'));
 
 export const Router = () => {
   return (
@@ -21,6 +22,9 @@ export const Router = () => {
         </Route>
         <Route path="/app/users" element={<Private />}>
           <Route index element={<UsersPage />} />
+        </Route>
+        <Route path="/app/users/create" element={<Private />}>
+          <Route index element={<UsersRegistration />} />
         </Route>
         <Route path="/app/customers" element={<Private />}>
           <Route index element={<CustomersPage />} />
