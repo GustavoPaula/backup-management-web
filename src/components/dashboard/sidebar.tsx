@@ -64,7 +64,7 @@ export function Sidebar() {
                 'flex items-center gap-3 px-4 py-3 rounded-lg transition-colors text-sm font-medium',
                 isActive
                   ? 'bg-sidebar-primary text-sidebar-primary-foreground'
-                  : 'text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground',
+                  : 'text-sidebar-foreground hover:bg-blue-500 hover:text-sidebar-accent-foreground',
               )}
             >
               <Icon className="w-5 h-5" />
