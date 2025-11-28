@@ -9,6 +9,8 @@ const DashboardPage = lazy(async () => await import('./pages/Dashboard'));
 const UsersPage = lazy(async () => await import('./pages/Users'));
 const CustomersPage = lazy(async () => await import('./pages/Customers'));
 const UsersRegistration = lazy(async () => await import('./pages/UsersCreate'));
+const DevicesPage = lazy(async () => await import('./pages/Devices'));
+const BackupPlansPage = lazy(async () => await import('./pages/BackupPlans'));
 
 export const Router = () => {
   return (
@@ -28,6 +30,12 @@ export const Router = () => {
         </Route>
         <Route path="/app/customers" element={<Private />}>
           <Route index element={<CustomersPage />} />
+        </Route>
+        <Route path="/app/devices" element={<Private />}>
+          <Route index element={<DevicesPage />} />
+        </Route>
+        <Route path="/app/backup-plans" element={<Private />}>
+          <Route index element={<BackupPlansPage />} />
         </Route>
       </Routes>
     </BrowserRouter>
