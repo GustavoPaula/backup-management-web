@@ -36,7 +36,7 @@ export function LoginForm() {
   return (
     <Card className="w-full max-w-md shadow-2xl overflow-hidden">
       {/* Header with gradient */}
-      <div className="bg-linear-to-br from-blue-500 to-blue-600 text-white px-8 py-12 text-center">
+      <div className="bg-linear-to-br bg-blue-600 text-white px-8 py-4 text-center">
         <div className="bg-white w-41 h-41 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
           <img
             src="/src/public/images/logo-wt.jpeg"
