@@ -24,15 +24,12 @@ import {
   SelectValue,
 } from '../ui/select';
 
-interface UserRegistrationModalProps {
+interface UserModalProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
 }
 
-export function UserRegistrationModal({
-  open,
-  onOpenChange,
-}: UserRegistrationModalProps) {
+export function UserModal({ open, onOpenChange }: UserModalProps) {
   const [formData, setFormData] = useState({
     fullName: '',
     username: '',

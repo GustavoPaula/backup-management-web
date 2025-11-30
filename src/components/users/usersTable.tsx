@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 import { Search, Plus } from 'lucide-react';
 
-import { UserRegistrationModal } from '../modal/user-registration-modal';
+import { UserModal } from '../modal/user-modal';
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';
 import { UsersPagination } from './usersPagination';
@@ -91,10 +91,7 @@ export function UsersTable() {
 
         <UsersPagination />
         {/* User Registration Modal */}
-        <UserRegistrationModal
-          open={isModalOpen}
-          onOpenChange={setIsModalOpen}
-        />
+        <UserModal open={isModalOpen} onOpenChange={setIsModalOpen} />
       </div>
     </div>
   );
