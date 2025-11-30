@@ -1,5 +1,8 @@
+import { useState } from 'react';
+
 import { Search, Plus } from 'lucide-react';
 
+import { DeviceModal } from '../modal/device-modal';
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';
 import { DevicesPagination } from './devicesPagination';
@@ -16,6 +19,8 @@ const devices = [
 ];
 
 export function DevicesTable() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   return (
     <div className="space-y-6">
       <div className="bg-card border border-border rounded-lg overflow-hidden">
@@ -33,7 +38,10 @@ export function DevicesTable() {
                 className="pl-10"
               />
             </div>
-            <Button className="gap-2 bg-blue-700 hover:bg-blue-800 whitespace-nowrap">
+            <Button
+              onClick={() => setIsModalOpen(true)}
+              className="gap-2 bg-blue-700 hover:bg-blue-800 whitespace-nowrap"
+            >
               <Plus className="h-4 w-4" />
               Adicionar dispositivo
             </Button>
@@ -67,6 +75,7 @@ export function DevicesTable() {
         </div>
 
         <DevicesPagination />
+        <DeviceModal open={isModalOpen} onOpenChange={setIsModalOpen} />
       </div>
     </div>
   );
