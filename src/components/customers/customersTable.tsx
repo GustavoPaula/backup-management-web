@@ -20,6 +20,9 @@ const customers = [
 
 export function CustomersTable() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+  };
 
   return (
     <div className="space-y-6">
@@ -39,7 +42,7 @@ export function CustomersTable() {
               />
             </div>
             <Button
-              onClick={() => setIsModalOpen(true)}
+              onClick={handleOpenModal}
               className="gap-2 bg-blue-700 hover:bg-blue-800 whitespace-nowrap"
             >
               <Plus className="h-4 w-4" />

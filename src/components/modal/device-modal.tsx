@@ -35,16 +35,30 @@ export function DeviceModal({ open, onOpenChange }: DeviceModalProps) {
     customers: '',
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // TODO: Implement user registration logic
-    console.log('Registering user:', formData);
-    // Reset form and close modal
+  const handleClose = () => {
+    onOpenChange(false);
+  };
+
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { id, value } = event.target;
+
+    setFormData((current) => ({
+      ...current,
+      [id]: value,
+    }));
+  };
+
+  const handleCustomersChange = (value: string) => {
+    setFormData((current) => ({ ...current, customers: value }));
+  };
+
+  const handleSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
     setFormData({
       fullName: '',
       customers: '',
     });
-    onOpenChange(false);
+    handleClose();
   };
 
   return (
@@ -62,36 +76,30 @@ export function DeviceModal({ open, onOpenChange }: DeviceModalProps) {
 
         <form onSubmit={handleSubmit}>
           <div className="space-y-4 py-4">
-            {/* Full Name */}
             <div className="space-y-2">
               <Label htmlFor="fullName" className="text-sm font-medium">
                 Nome
               </Label>
               <div className="relative">
-                <User className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+                <User className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
                 <Input
                   id="fullName"
                   placeholder="Digite o nome"
                   className="pl-9"
                   value={formData.fullName}
-                  onChange={(e) =>
-                    setFormData({ ...formData, fullName: e.target.value })
-                  }
+                  onChange={handleInputChange}
                   required
                 />
               </div>
             </div>
 
-            {/* Clientes */}
             <div className="space-y-2">
               <Label htmlFor="customers" className="text-sm font-medium">
                 Cliente
               </Label>
               <Select
                 value={formData.customers}
-                onValueChange={(value) =>
-                  setFormData({ ...formData, customers: value })
-                }
+                onValueChange={handleCustomersChange}
                 required
               >
                 <SelectTrigger id="customers" className="w-full">
@@ -112,11 +120,7 @@ export function DeviceModal({ open, onOpenChange }: DeviceModalProps) {
           </div>
 
           <DialogFooter>
-            <Button
-              type="button"
-              variant="outline"
-              onClick={() => onOpenChange(false)}
-            >
+            <Button type="button" variant="outline" onClick={handleClose}>
               Cancelar
             </Button>
             <Button type="submit" className="bg-blue-600 hover:bg-blue-700">
