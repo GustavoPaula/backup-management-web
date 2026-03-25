@@ -3,9 +3,9 @@
 import type React from 'react';
 import { useState } from 'react';
 
-import { Link, User } from 'lucide-react';
+import { User } from 'lucide-react';
 
-import { Button } from '../ui/button';
+import { Button } from '../../../components/ui/button';
 import {
   Dialog,
   DialogContent,
@@ -13,26 +13,18 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from '../ui/dialog';
-import { Input } from '../ui/input';
-import { Label } from '../ui/label';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '../ui/select';
+} from '../../../components/ui/dialog';
+import { Input } from '../../../components/ui/input';
+import { Label } from '../../../components/ui/label';
 
-interface DeviceModalProps {
+interface CustomerModalProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
 }
 
-export function DeviceModal({ open, onOpenChange }: DeviceModalProps) {
+export function CustomerModal({ open, onOpenChange }: CustomerModalProps) {
   const [formData, setFormData] = useState({
     fullName: '',
-    customers: '',
   });
 
   const handleClose = () => {
@@ -48,15 +40,10 @@ export function DeviceModal({ open, onOpenChange }: DeviceModalProps) {
     }));
   };
 
-  const handleCustomersChange = (value: string) => {
-    setFormData((current) => ({ ...current, customers: value }));
-  };
-
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
     setFormData({
       fullName: '',
-      customers: '',
     });
     handleClose();
   };
@@ -66,11 +53,10 @@ export function DeviceModal({ open, onOpenChange }: DeviceModalProps) {
       <DialogContent className="sm:max-w-[500px]">
         <DialogHeader>
           <DialogTitle className="text-xl font-semibold">
-            Cadastrar Novo Dispositivo
+            Cadastrar Novo Cliente
           </DialogTitle>
           <DialogDescription>
-            Preencha os dados abaixo para adicionar um novo dispositivo ao
-            sistema.
+            Preencha os dados abaixo para adicionar um novo cliente ao sistema.
           </DialogDescription>
         </DialogHeader>
 
@@ -81,7 +67,7 @@ export function DeviceModal({ open, onOpenChange }: DeviceModalProps) {
                 Nome
               </Label>
               <div className="relative">
-                <User className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+                <User className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
                 <Input
                   id="fullName"
                   placeholder="Digite o nome"
@@ -92,31 +78,6 @@ export function DeviceModal({ open, onOpenChange }: DeviceModalProps) {
                 />
               </div>
             </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="customers" className="text-sm font-medium">
-                Cliente
-              </Label>
-              <Select
-                value={formData.customers}
-                onValueChange={handleCustomersChange}
-                required
-              >
-                <SelectTrigger id="customers" className="w-full">
-                  <div className="flex items-center gap-2">
-                    <Link className="h-4 w-4 text-muted-foreground" />
-                    <SelectValue placeholder="Selecione o cliente" />
-                  </div>
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="cliente_a">Cliente A</SelectItem>
-                  <SelectItem value="cliente_b">Cliente B</SelectItem>
-                  <SelectItem value="cliente_c">Cliente C</SelectItem>
-                  <SelectItem value="cliente_d">Cliente D</SelectItem>
-                  <SelectItem value="cliente_e">Cliente E</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
           </div>
 
           <DialogFooter>
@@ -124,7 +85,7 @@ export function DeviceModal({ open, onOpenChange }: DeviceModalProps) {
               Cancelar
             </Button>
             <Button type="submit" className="bg-blue-600 hover:bg-blue-700">
-              Cadastrar Dispositivo
+              Cadastrar Cliente
             </Button>
           </DialogFooter>
         </form>

@@ -1,4 +1,4 @@
-import { UserModal } from '../../../components/modal/user-modal';
+import { UserModal } from '../components/UserModal';
 
 export function UserRegistrationPageView() {
   return (
@@ -7,3 +7,4 @@ export function UserRegistrationPageView() {
     </div>
   );
 }
+

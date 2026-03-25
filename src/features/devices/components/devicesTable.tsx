@@ -1,11 +1,11 @@
 import { useState } from 'react';
 
-import { Search, Plus } from 'lucide-react';
+import { Plus, Search } from 'lucide-react';
 
-import { DeviceModal } from '../../../components/modal/device-modal';
+import { DeviceModal } from './DeviceModal';
+import { DataTablePagination } from '../../../components/shared/listing/DataTablePagination';
 import { Button } from '../../../components/ui/button';
 import { Input } from '../../../components/ui/input';
-import { DevicesPagination } from './devicesPagination';
 import { DevicesTableRow } from './devicesTableRow';
 
 const devices = [
@@ -20,21 +20,18 @@ const devices = [
 
 export function DevicesTable() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const handleOpenModal = () => {
-    setIsModalOpen(true);
-  };
 
   return (
     <div className="space-y-6">
-      <div className="bg-card border border-border rounded-lg overflow-hidden">
-        <div className="flex items-center justify-between p-6 border-b border-border gap-4">
-          <h2 className="text-lg font-semibold text-foreground whitespace-nowrap">
+      <div className="overflow-hidden rounded-lg border border-border bg-card">
+        <div className="flex items-center justify-between gap-4 border-b border-border p-6">
+          <h2 className="whitespace-nowrap text-lg font-semibold text-foreground">
             Dispositivos Cadastrados
           </h2>
 
-          <div className="flex items-center gap-4 flex-1 justify-end">
+          <div className="flex flex-1 items-center justify-end gap-4">
             <div className="relative max-w-md flex-1">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+              <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
               <Input
                 type="text"
                 placeholder="Buscar dispositivos..."
@@ -42,8 +39,8 @@ export function DevicesTable() {
               />
             </div>
             <Button
-              onClick={handleOpenModal}
-              className="gap-2 bg-blue-700 hover:bg-blue-800 whitespace-nowrap"
+              onClick={() => setIsModalOpen(true)}
+              className="gap-2 whitespace-nowrap bg-blue-700 hover:bg-blue-800"
             >
               <Plus className="h-4 w-4" />
               Adicionar dispositivo
@@ -55,21 +52,21 @@ export function DevicesTable() {
           <table className="w-full">
             <thead className="bg-muted/50">
               <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
+                <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-muted-foreground">
                   Dispositivo
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
-                  Data Criação
+                <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-muted-foreground">
+                  Data Criacao
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
-                  Data Atualização
+                <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-muted-foreground">
+                  Data Atualizacao
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
-                  Ações
+                <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-muted-foreground">
+                  Acoes
                 </th>
               </tr>
             </thead>
-            <tbody className="bg-card divide-y divide-border">
+            <tbody className="divide-y divide-border bg-card">
               {devices.map((device) => (
                 <DevicesTableRow key={device.id} device={device} />
               ))}
@@ -77,12 +74,9 @@ export function DevicesTable() {
           </table>
         </div>
 
-        <DevicesPagination />
+        <DataTablePagination />
         <DeviceModal open={isModalOpen} onOpenChange={setIsModalOpen} />
       </div>
     </div>
   );
 }
-
-
-

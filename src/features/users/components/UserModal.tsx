@@ -5,7 +5,7 @@ import { useState } from 'react';
 
 import { Lock, Mail, Shield, User } from 'lucide-react';
 
-import { Button } from '../ui/button';
+import { Button } from '../../../components/ui/button';
 import {
   Dialog,
   DialogContent,
@@ -13,16 +13,16 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from '../ui/dialog';
-import { Input } from '../ui/input';
-import { Label } from '../ui/label';
+} from '../../../components/ui/dialog';
+import { Input } from '../../../components/ui/input';
+import { Label } from '../../../components/ui/label';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '../ui/select';
+} from '../../../components/ui/select';
 
 interface UserModalProps {
   open: boolean;
@@ -72,10 +72,10 @@ export function UserModal({ open, onOpenChange }: UserModalProps) {
       <DialogContent className="sm:max-w-[500px]">
         <DialogHeader>
           <DialogTitle className="text-xl font-semibold">
-            Cadastrar Novo UsuÃ¡rio
+            Cadastrar Novo Usuario
           </DialogTitle>
           <DialogDescription>
-            Preencha os dados abaixo para adicionar um novo usuÃ¡rio ao sistema.
+            Preencha os dados abaixo para adicionar um novo usuario ao sistema.
           </DialogDescription>
         </DialogHeader>
 
@@ -86,7 +86,7 @@ export function UserModal({ open, onOpenChange }: UserModalProps) {
                 Nome Completo
               </Label>
               <div className="relative">
-                <User className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+                <User className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
                 <Input
                   id="fullName"
                   placeholder="Digite o nome completo"
@@ -100,13 +100,13 @@ export function UserModal({ open, onOpenChange }: UserModalProps) {
 
             <div className="space-y-2">
               <Label htmlFor="username" className="text-sm font-medium">
-                Nome de UsuÃ¡rio
+                Nome de Usuario
               </Label>
               <div className="relative">
-                <User className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+                <User className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
                 <Input
                   id="username"
-                  placeholder="Digite o nome de usuÃ¡rio"
+                  placeholder="Digite o nome de usuario"
                   className="pl-9"
                   value={formData.username}
                   onChange={handleInputChange}
@@ -120,7 +120,7 @@ export function UserModal({ open, onOpenChange }: UserModalProps) {
                 E-mail
               </Label>
               <div className="relative">
-                <Mail className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+                <Mail className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
                 <Input
                   id="email"
                   type="email"
@@ -138,7 +138,7 @@ export function UserModal({ open, onOpenChange }: UserModalProps) {
                 Senha
               </Label>
               <div className="relative">
-                <Lock className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+                <Lock className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
                 <Input
                   id="password"
                   type="password"
@@ -153,7 +153,7 @@ export function UserModal({ open, onOpenChange }: UserModalProps) {
 
             <div className="space-y-2">
               <Label htmlFor="permission" className="text-sm font-medium">
-                PermissÃ£o
+                Permissao
               </Label>
               <Select
                 value={formData.permission}
@@ -163,7 +163,7 @@ export function UserModal({ open, onOpenChange }: UserModalProps) {
                 <SelectTrigger id="permission" className="w-full">
                   <div className="flex items-center gap-2">
                     <Shield className="h-4 w-4 text-muted-foreground" />
-                    <SelectValue placeholder="Selecione a permissÃ£o" />
+                    <SelectValue placeholder="Selecione a permissao" />
                   </div>
                 </SelectTrigger>
                 <SelectContent>
@@ -179,7 +179,7 @@ export function UserModal({ open, onOpenChange }: UserModalProps) {
               Cancelar
             </Button>
             <Button type="submit" className="bg-blue-600 hover:bg-blue-700">
-              Cadastrar UsuÃ¡rio
+              Cadastrar Usuario
             </Button>
           </DialogFooter>
         </form>

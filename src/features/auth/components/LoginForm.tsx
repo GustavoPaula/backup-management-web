@@ -3,15 +3,15 @@
 import { FormEventHandler, useCallback, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import { User, Key, LogIn } from 'lucide-react';
+import { Key, LogIn, User } from 'lucide-react';
 
 import { ROUTES } from '../../../app/paths/routes';
 import { useAuth } from '../../../hooks/useAuth';
-import { Button } from '../../ui/button';
-import { Card, CardContent } from '../../ui/card';
-import { Checkbox } from '../../ui/checkbox';
-import { Input } from '../../ui/input';
-import { Label } from '../../ui/label';
+import { Button } from '../../../components/ui/button';
+import { Card, CardContent } from '../../../components/ui/card';
+import { Checkbox } from '../../../components/ui/checkbox';
+import { Input } from '../../../components/ui/input';
+import { Label } from '../../../components/ui/label';
 
 export function LoginForm() {
   const [rememberMe, setRememberMe] = useState(false);
@@ -54,10 +54,7 @@ export function LoginForm() {
       <CardContent className="p-8">
         <form className="space-y-5" onSubmit={handleSubmit}>
           <div className="space-y-2">
-            <Label
-              htmlFor="username"
-              className="text-sm font-medium text-gray-700"
-            >
+            <Label htmlFor="username" className="text-sm font-medium text-gray-700">
               Usuario
             </Label>
             <div className="relative">
@@ -73,10 +70,7 @@ export function LoginForm() {
           </div>
 
           <div className="space-y-2">
-            <Label
-              htmlFor="password"
-              className="text-sm font-medium text-gray-700"
-            >
+            <Label htmlFor="password" className="text-sm font-medium text-gray-700">
               Senha
             </Label>
             <div className="relative">
@@ -98,10 +92,7 @@ export function LoginForm() {
                 checked={rememberMe}
                 onCheckedChange={handleRememberMe}
               />
-              <Label
-                htmlFor="remember"
-                className="cursor-pointer text-sm text-gray-600"
-              >
+              <Label htmlFor="remember" className="cursor-pointer text-sm text-gray-600">
                 Lembrar-me
               </Label>
             </div>
