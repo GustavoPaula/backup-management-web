@@ -1,6 +1,7 @@
 import { lazy } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
+import { AppLayout } from './app/layout/AppLayout';
 import { Private } from './features/auth/components/Private';
 import { Public } from './features/auth/components/Public';
 
@@ -30,22 +31,14 @@ export const Router = () => {
           <Route index element={<HomePage />} />
         </Route>
         <Route path="/app" element={<Private />}>
-          <Route index element={<DashboardPage />} />
-        </Route>
-        <Route path="/app/users" element={<Private />}>
-          <Route index element={<UsersPage />} />
-        </Route>
-        <Route path="/app/users/create" element={<Private />}>
-          <Route index element={<UsersRegistration />} />
-        </Route>
-        <Route path="/app/customers" element={<Private />}>
-          <Route index element={<CustomersPage />} />
-        </Route>
-        <Route path="/app/devices" element={<Private />}>
-          <Route index element={<DevicesPage />} />
-        </Route>
-        <Route path="/app/backup-plans" element={<Private />}>
-          <Route index element={<BackupPlansPage />} />
+          <Route element={<AppLayout />}>
+            <Route index element={<DashboardPage />} />
+            <Route path="users" element={<UsersPage />} />
+            <Route path="users/create" element={<UsersRegistration />} />
+            <Route path="customers" element={<CustomersPage />} />
+            <Route path="devices" element={<DevicesPage />} />
+            <Route path="backup-plans" element={<BackupPlansPage />} />
+          </Route>
         </Route>
       </Routes>
     </BrowserRouter>

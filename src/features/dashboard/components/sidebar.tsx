@@ -2,14 +2,7 @@
 
 import { Link, useLocation } from 'react-router-dom';
 
-import {
-  LayoutDashboard,
-  Users,
-  Building2,
-  Server,
-  Calendar,
-  AlertTriangle,
-} from 'lucide-react';
+import { Building2, Calendar, LayoutDashboard, Server, Users } from 'lucide-react';
 
 import { cn } from '../../../lib/utils';
 
@@ -17,57 +10,54 @@ const menuItems = [
   {
     label: 'Dashboard',
     icon: LayoutDashboard,
-    href: '/',
+    to: '/app',
   },
   {
-    label: 'Usuários',
+    label: 'Usuarios',
     icon: Users,
-    href: '/usuarios',
+    to: '/app/users',
   },
   {
     label: 'Clientes',
     icon: Building2,
-    href: '/clientes',
+    to: '/app/customers',
   },
   {
     label: 'Dispositivos',
     icon: Server,
-    href: '/dispositivos',
+    to: '/app/devices',
   },
   {
     label: 'Planos de Backup',
     icon: Calendar,
-    href: '/planos',
-  },
-  {
-    label: 'Falhas de Backup',
-    icon: AlertTriangle,
-    href: '/falhas',
+    to: '/app/backup-plans',
   },
 ];
 
 export function Sidebar() {
-  const pathname = useLocation();
+  const { pathname } = useLocation();
 
   return (
-    <aside className="w-64 border-r border-border bg-sidebar hidden lg:block">
-      <nav className="p-4 space-y-2">
+    <aside className="hidden w-64 border-r border-border bg-sidebar lg:block">
+      <nav className="space-y-2 p-4">
         {menuItems.map((item) => {
           const Icon = item.icon;
-          const isActive = pathname === item.href;
+          const isActive =
+            pathname === item.to ||
+            (item.to !== '/app' && pathname.startsWith(`${item.to}/`));
 
           return (
             <Link
-              key={item.href}
-              href={item.href}
+              key={item.to}
+              to={item.to}
               className={cn(
-                'flex items-center gap-3 px-4 py-3 rounded-lg transition-colors text-sm font-medium',
+                'flex items-center gap-3 rounded-lg px-4 py-3 text-sm font-medium transition-colors',
                 isActive
                   ? 'bg-sidebar-primary text-sidebar-primary-foreground'
                   : 'text-sidebar-foreground hover:bg-blue-500 hover:text-sidebar-accent-foreground',
               )}
             >
-              <Icon className="w-5 h-5" />
+              <Icon className="h-5 w-5" />
               {item.label}
             </Link>
           );
@@ -76,4 +66,3 @@ export function Sidebar() {
     </aside>
   );
 }
-
