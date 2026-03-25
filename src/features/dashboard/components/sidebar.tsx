@@ -5,7 +5,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { Building2, Calendar, LayoutDashboard, Server, Users } from 'lucide-react';
 
 import { ROUTES } from '../../../app/paths/routes';
-import { cn } from '../../../lib/utils';
+import { cn } from '../../../utils/className';
 
 const menuItems = [
   {
@@ -67,3 +67,4 @@ export function Sidebar() {
     </aside>
   );
 }
+

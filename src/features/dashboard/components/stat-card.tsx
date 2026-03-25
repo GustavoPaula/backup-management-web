@@ -1,4 +1,4 @@
-import { cn } from '../../../lib/utils';
+import { cn } from '../../../utils/className';
 import { Card } from '../../../components/ui/card';
 
 interface StatCardProps {
@@ -30,5 +30,6 @@ export function StatCard({
     </Card>
   );
 }
+
 
 
