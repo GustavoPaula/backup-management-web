@@ -1,10 +1,9 @@
 import { type FC } from 'react';
 
-import { UsersPage } from '../components/usersPage';
+import { UsersPageContainer } from '../containers/UsersPageContainer';
 
 const Users: FC = () => {
-  return <UsersPage />;
+  return <UsersPageContainer />;
 };
 
 export default Users;
-

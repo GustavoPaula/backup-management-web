@@ -1,9 +1,9 @@
 import { type FC } from 'react';
 
-import UserRegistrationPage from '../components/create';
+import { UserRegistrationPageContainer } from '../containers/UserRegistrationPageContainer';
 
 const UsersRegistration: FC = () => {
-  return <UserRegistrationPage />;
+  return <UserRegistrationPageContainer />;
 };
 
 export default UsersRegistration;

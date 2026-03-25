@@ -1,10 +1,9 @@
 import { type FC } from 'react';
 
-import { DevicesPage } from '../components/devicesPage';
+import { DevicesPageContainer } from '../containers/DevicesPageContainer';
 
 const Devices: FC = () => {
-  return <DevicesPage />;
+  return <DevicesPageContainer />;
 };
 
 export default Devices;
-

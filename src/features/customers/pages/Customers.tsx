@@ -1,10 +1,9 @@
 import { type FC } from 'react';
 
-import { CustomersPage } from '../components/customersPage';
+import { CustomersPageContainer } from '../containers/CustomersPageContainer';
 
 const Customers: FC = () => {
-  return <CustomersPage />;
+  return <CustomersPageContainer />;
 };
 
 export default Customers;
-

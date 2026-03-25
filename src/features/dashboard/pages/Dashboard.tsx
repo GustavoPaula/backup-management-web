@@ -1,10 +1,9 @@
 import { type FC } from 'react';
 
-import DashboardPage from '../components/dashboardPage';
+import { DashboardPageContainer } from '../containers/DashboardPageContainer';
 
 const Dashboard: FC = () => {
-  return <DashboardPage />;
+  return <DashboardPageContainer />;
 };
 
 export default Dashboard;
-

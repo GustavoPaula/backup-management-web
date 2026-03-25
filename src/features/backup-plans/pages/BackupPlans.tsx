@@ -1,10 +1,9 @@
 import { type FC } from 'react';
 
-import { BackupPlansPage } from '../components/backupPlanPage';
+import { BackupPlansPageContainer } from '../containers/BackupPlansPageContainer';
 
 const BackupPlans: FC = () => {
-  return <BackupPlansPage />;
+  return <BackupPlansPageContainer />;
 };
 
 export default BackupPlans;
-
