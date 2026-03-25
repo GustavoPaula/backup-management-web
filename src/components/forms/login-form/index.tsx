@@ -1,9 +1,11 @@
 'use client';
 
 import { FormEventHandler, useCallback, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import { User, Key, LogIn } from 'lucide-react';
 
+import { ROUTES } from '../../../app/paths/routes';
 import { useAuth } from '../../../hooks/useAuth';
 import { Button } from '../../ui/button';
 import { Card, CardContent } from '../../ui/card';
@@ -34,45 +36,42 @@ export function LoginForm() {
   );
 
   return (
-    <Card className="w-full max-w-md shadow-2xl overflow-hidden">
-      {/* Header with gradient */}
-      <div className="bg-linear-to-br bg-blue-600 text-white px-8 py-4 text-center">
-        <div className="bg-white w-41 h-41 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
+    <Card className="w-full max-w-md overflow-hidden shadow-2xl">
+      <div className="bg-linear-to-br bg-blue-600 px-8 py-4 text-center text-white">
+        <div className="mx-auto mb-4 flex h-41 w-41 items-center justify-center rounded-full bg-white shadow-lg">
           <img
             src="/src/public/images/logo-wt.jpeg"
-            alt="WT Soluções em Tecnologia"
+            alt="WT Solucoes em Tecnologia"
             width={96}
             height={96}
-            className="h-30 w-30 object-contain rounded-lg"
+            className="h-30 w-30 rounded-lg object-contain"
           />
         </div>
-        <h1 className="text-3xl font-bold mb-2">Sistema de Backup</h1>
-        <p className="text-purple-100 text-sm">Faça login para continuar</p>
+        <h1 className="mb-2 text-3xl font-bold">Sistema de Backup</h1>
+        <p className="text-sm text-purple-100">Faca login para continuar</p>
       </div>
 
       <CardContent className="p-8">
         <form className="space-y-5" onSubmit={handleSubmit}>
-          {/* Username field */}
           <div className="space-y-2">
             <Label
               htmlFor="username"
               className="text-sm font-medium text-gray-700"
             >
-              Usuário
+              Usuario
             </Label>
             <div className="relative">
-              <User className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+              <User className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 text-gray-400" />
               <Input
                 id="username"
                 name="username"
                 type="text"
-                placeholder="Digite seu usuário"
-                className="pl-10 h-12"
+                placeholder="Digite seu usuario"
+                className="h-12 pl-10"
               />
             </div>
           </div>
 
-          {/* Password field */}
           <div className="space-y-2">
             <Label
               htmlFor="password"
@@ -81,18 +80,17 @@ export function LoginForm() {
               Senha
             </Label>
             <div className="relative">
-              <Key className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+              <Key className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 text-gray-400" />
               <Input
                 id="password"
                 type="password"
                 name="password"
                 placeholder="Digite sua senha"
-                className="pl-10 h-12"
+                className="h-12 pl-10"
               />
             </div>
           </div>
 
-          {/* Remember me and forgot password */}
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <Checkbox
@@ -102,25 +100,24 @@ export function LoginForm() {
               />
               <Label
                 htmlFor="remember"
-                className="text-sm text-gray-600 cursor-pointer"
+                className="cursor-pointer text-sm text-gray-600"
               >
                 Lembrar-me
               </Label>
             </div>
-            <a
-              href="/forgot-password"
-              className="text-sm text-blue-600 hover:text-blue-700 font-medium"
+            <Link
+              to={ROUTES.public.forgotPassword}
+              className="text-sm font-medium text-blue-600 hover:text-blue-700"
             >
               Esqueceu a senha?
-            </a>
+            </Link>
           </div>
 
-          {/* Login button */}
           <Button
             type="submit"
-            className="w-full h-12 bg-linear-to-br from-blue-500 to-blue-600 text-white font-medium shadow-lg"
+            className="h-12 w-full bg-linear-to-br from-blue-500 to-blue-600 font-medium text-white shadow-lg"
           >
-            <LogIn className="w-5 h-5 mr-2" />
+            <LogIn className="mr-2 h-5 w-5" />
             Entrar
           </Button>
         </form>

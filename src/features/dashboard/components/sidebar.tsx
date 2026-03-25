@@ -4,33 +4,34 @@ import { Link, useLocation } from 'react-router-dom';
 
 import { Building2, Calendar, LayoutDashboard, Server, Users } from 'lucide-react';
 
+import { ROUTES } from '../../../app/paths/routes';
 import { cn } from '../../../lib/utils';
 
 const menuItems = [
   {
     label: 'Dashboard',
     icon: LayoutDashboard,
-    to: '/app',
+    to: ROUTES.app.root,
   },
   {
     label: 'Usuarios',
     icon: Users,
-    to: '/app/users',
+    to: ROUTES.app.users,
   },
   {
     label: 'Clientes',
     icon: Building2,
-    to: '/app/customers',
+    to: ROUTES.app.customers,
   },
   {
     label: 'Dispositivos',
     icon: Server,
-    to: '/app/devices',
+    to: ROUTES.app.devices,
   },
   {
     label: 'Planos de Backup',
     icon: Calendar,
-    to: '/app/backup-plans',
+    to: ROUTES.app.backupPlans,
   },
 ];
 
@@ -44,7 +45,7 @@ export function Sidebar() {
           const Icon = item.icon;
           const isActive =
             pathname === item.to ||
-            (item.to !== '/app' && pathname.startsWith(`${item.to}/`));
+            (item.to !== ROUTES.app.root && pathname.startsWith(`${item.to}/`));
 
           return (
             <Link

@@ -8,7 +8,9 @@ import {
   type AuthContextProps,
   type SignIn,
 } from '../../contexts/auth';
+import { API_PATHS } from '../../services/paths/api';
 import { LoginResponse } from '../../types';
+
 export interface AuthProviderProps {
   children: ReactNode;
 }
@@ -20,17 +22,16 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
 
   const signIn = useCallback<SignIn>(async (props) => {
     try {
-      const response = await fetch(import.meta.env.VITE_API_URL + '/login', {
+      const response = await fetch(API_PATHS.auth.login, {
         method: 'POST',
         body: JSON.stringify(props),
       });
-      if (!response.ok) throw new Error('Credenciais inválidas');
+      if (!response.ok) throw new Error('Credenciais invalidas');
       const data = (await response.json()) as LoginResponse;
       const decodedToken = jwtDecode<CustomJwtPayload>(data.data);
       setDecodedToken(decodedToken);
       setIsAuthenticated(true);
     } catch (error) {
-      // eslint-disable-next-line no-console
       console.log(error);
       setIsAuthenticated(false);
     }
