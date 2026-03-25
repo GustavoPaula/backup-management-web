@@ -1,16 +1,26 @@
 import { lazy } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-import { Private } from './components/auth/Private';
-import { Public } from './components/auth/Public';
+import { Private } from './features/auth/components/Private';
+import { Public } from './features/auth/components/Public';
 
-const HomePage = lazy(async () => await import('./pages/Home'));
-const DashboardPage = lazy(async () => await import('./pages/Dashboard'));
-const UsersPage = lazy(async () => await import('./pages/Users'));
-const CustomersPage = lazy(async () => await import('./pages/Customers'));
-const UsersRegistration = lazy(async () => await import('./pages/UsersCreate'));
-const DevicesPage = lazy(async () => await import('./pages/Devices'));
-const BackupPlansPage = lazy(async () => await import('./pages/BackupPlans'));
+const HomePage = lazy(async () => await import('./features/auth/pages/Home'));
+const DashboardPage = lazy(
+  async () => await import('./features/dashboard/pages/Dashboard'),
+);
+const UsersPage = lazy(async () => await import('./features/users/pages/Users'));
+const CustomersPage = lazy(
+  async () => await import('./features/customers/pages/Customers'),
+);
+const UsersRegistration = lazy(
+  async () => await import('./features/users/pages/UsersCreate'),
+);
+const DevicesPage = lazy(
+  async () => await import('./features/devices/pages/Devices'),
+);
+const BackupPlansPage = lazy(
+  async () => await import('./features/backup-plans/pages/BackupPlans'),
+);
 
 export const Router = () => {
   return (
