@@ -1,5 +1,6 @@
 'use client';
 
+import { buildPaginationItems } from './listing.utils';
 import { Button } from '../../ui/button';
 
 interface DataTablePaginationProps {
@@ -13,6 +14,8 @@ export function DataTablePagination({
   pages = ['1', '2', '3'],
   currentPage = '1',
 }: DataTablePaginationProps) {
+  const paginationItems = buildPaginationItems(pages, currentPage);
+
   return (
     <div className="flex items-center justify-between border-t border-border px-6 py-4">
       <p className="text-sm text-muted-foreground">{summary}</p>
@@ -20,14 +23,14 @@ export function DataTablePagination({
         <Button variant="outline" size="sm">
           Anterior
         </Button>
-        {pages.map((page) => (
+        {paginationItems.map((page) => (
           <Button
-            key={page}
-            variant={page === currentPage ? 'default' : 'outline'}
+            key={page.label}
+            variant={page.isCurrent ? 'default' : 'outline'}
             size="sm"
-            className={page === currentPage ? 'bg-blue-700 hover:bg-blue-800' : undefined}
+            className={page.isCurrent ? 'bg-blue-700 hover:bg-blue-800' : undefined}
           >
-            {page}
+            {page.label}
           </Button>
         ))}
         <Button variant="outline" size="sm">

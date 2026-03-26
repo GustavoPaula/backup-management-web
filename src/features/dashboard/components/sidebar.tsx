@@ -6,6 +6,7 @@ import { Building2, Calendar, LayoutDashboard, Server, Users } from 'lucide-reac
 
 import { ROUTES } from '../../../app/paths/routes';
 import { cn } from '../../../utils/className';
+import { isSidebarItemActive } from '../navigation.utils';
 
 const menuItems = [
   {
@@ -43,9 +44,7 @@ export function Sidebar() {
       <nav className="space-y-2 p-4">
         {menuItems.map((item) => {
           const Icon = item.icon;
-          const isActive =
-            pathname === item.to ||
-            (item.to !== ROUTES.app.root && pathname.startsWith(`${item.to}/`));
+          const isActive = isSidebarItemActive(pathname, item.to);
 
           return (
             <Link
@@ -67,4 +66,3 @@ export function Sidebar() {
     </aside>
   );
 }
-

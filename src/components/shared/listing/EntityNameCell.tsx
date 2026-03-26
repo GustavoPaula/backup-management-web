@@ -1,16 +1,14 @@
 import { Avatar, AvatarFallback, AvatarImage } from '../../ui/avatar';
 
+import { getEntityInitials } from './listing.utils';
+
 interface EntityNameCellProps {
   name: string;
   avatar: string;
 }
 
 export function EntityNameCell({ name, avatar }: EntityNameCellProps) {
-  const initials = name
-    .split(' ')
-    .map((part) => part[0])
-    .join('')
-    .slice(0, 2);
+  const initials = getEntityInitials(name);
 
   return (
     <div className="flex items-center gap-3">
